@@ -76,7 +76,8 @@ Route::get('report', [KategoriController::class, 'report'])->name('report');
 
 
 Route::get('form', [UmurController::class, 'form'])->name('form.umur');
-Route::get('sukses', [UmurController::class, 'sukses'])->middleware(UmurMiddleware::class)->name('sukses');
+
+Route::get('sukses', [UmurController::class, 'sukses'])->middleware(['gender', 'umur'])->name('sukses');
 
 // route proses memfilter ke halaman sukses.
 Route::post('proses', [UmurController::class, 'proses'])->name('proses');
