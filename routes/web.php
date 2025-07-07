@@ -13,20 +13,20 @@ Route::get('/', function () {
 
 // basic Routing
 // menampilkan data
-Route::get('homepage', function(){
+Route::get('homepage', function () {
     return 'Ini adalah route homepage';
 });
 
 // menampilkan halaman.
-Route::get('home', function(){
+Route::get('home', function () {
     return view('page.home');
 })->name('halaman.home');
 
-Route::get('profile', function(){
+Route::get('profile', function () {
     return view('page.profile');
 })->name('halaman.profile');
 
-Route::get('about', function(){
+Route::get('about', function () {
     return view('page.about');
 })->name('halaman.about');
 
@@ -34,30 +34,51 @@ Route::view('tentang', 'page.about');
 
 
 //route dengan parameter
-Route::get('mobil/{parameter}', function($mobil){
+Route::get('mobil/{parameter}', function ($mobil) {
     // uri/{param} != parameter yang difunction
     // output : 
     return 'Ini adalah halaman route mobil dengan parameter merk : ' . $mobil . ' saya baru beli kemarin.';
 });
 
 // route dengan parameter optional
-Route::get('motor/{parameter?}', function($param = 'mobil'){
+Route::get('motor/{parameter?}', function ($param = 'mobil') {
     return "Ini adalah motor saya, mereknya : {$param}, saya belinya cash";
 });
 
 
 // Memberikan group pada routing.
-Route::prefix('training')->group(function(){
-    Route::get('laravel', function(){
+Route::prefix('training')->group(function () {
+    Route::get('laravel', function () {
         return 'ini adalah kelas laravel';
     }); //item laravel
-    Route::get('mtcna', function(){
+    Route::get('mtcna', function () {
         return 'ini adalah kelas mtcna';
     }); //item mtcna
-    Route::get('ccna', function(){
+    Route::get('ccna', function () {
         return 'ini adalah kelas ccna';
     }); //item ccna
 });
+
+// group untuk middleware gender
+Route::prefix('training')->middleware('gender')->group(function () {
+
+    Route::get('laravel', function () {
+        return 'ini adalah kelas laravel';
+    }); //item laravel
+
+    // di dalam group gender, ada kelas yang harus umur > 18 tahun. maka dibuatkan kembali group middleware umur.
+    Route::middleware('umur')->group(function () {
+        Route::get('mtcna', function () {
+            return 'ini adalah kelas mtcna';
+        })->name('mtcna'); //item mtcna
+
+        Route::get('ccna', function () {
+            return 'ini adalah kelas ccna';
+        }); //item ccna
+    });
+
+});
+
 
 // route dengan controller
 Route::get('barang', [BarangController::class, 'index']);
@@ -77,11 +98,9 @@ Route::get('report', [KategoriController::class, 'report'])->name('report');
 
 Route::get('form', [UmurController::class, 'form'])->name('form.umur');
 
-Route::get('sukses', [UmurController::class, 'sukses'])->middleware(['gender', 'umur'])->name('sukses');
+Route::get('sukses', [UmurController::class, 'sukses']) //routenya
+    ->middleware(['gender', 'umur']) //middlewarenya
+    ->name('sukses'); //namenya
 
 // route proses memfilter ke halaman sukses.
 Route::post('proses', [UmurController::class, 'proses'])->name('proses');
-
-
-
-
