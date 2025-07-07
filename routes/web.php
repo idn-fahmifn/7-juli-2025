@@ -3,6 +3,7 @@
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\UmurController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -72,6 +73,8 @@ Route::get('area/{param}', [AreaController::class, 'detail']);
 Route::resource('kategori', KategoriController::class);
 Route::get('report', [KategoriController::class, 'report'])->name('report');
 
+
+Route::get('form', [UmurController::class, 'form'])->name('form.umur');
 
 
 
