@@ -4,6 +4,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UmurController;
+use App\Http\Middleware\UmurMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -75,7 +76,7 @@ Route::get('report', [KategoriController::class, 'report'])->name('report');
 
 
 Route::get('form', [UmurController::class, 'form'])->name('form.umur');
-Route::get('sukses', [UmurController::class, 'sukses'])->name('sukses');
+Route::get('sukses', [UmurController::class, 'sukses'])->middleware(UmurMiddleware::class)->name('sukses');
 
 // route proses memfilter ke halaman sukses.
 Route::post('proses', [UmurController::class, 'proses'])->name('proses');

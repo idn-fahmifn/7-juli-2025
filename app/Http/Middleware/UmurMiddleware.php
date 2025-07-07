@@ -23,6 +23,7 @@ class UmurMiddleware
             //izinkan route mengkases halaman sukses
             return $next($request);
         }
+        
         return back()->with('gagal', 'Umur kamu tidak sesuai');
 
     }

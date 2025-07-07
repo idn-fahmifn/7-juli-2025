@@ -23,8 +23,17 @@
                 Halaman Form Umur
             </div>
             <div class="text-muted">Masukan nama dan umur anda dibawah : </div>
-            <form action="{{route('proses')}}" method="post">
-                
+
+
+            @if (session('gagal'))
+                <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
+                    <strong>Whoops!</strong> {{session('gagal')}}.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <form action="{{ route('proses') }}" method="post">
+
                 {{-- keamanan untuk generate token. --}}
                 @csrf
                 <div class="form-group mt-3">
