@@ -18,12 +18,15 @@
 
 <body>
     <div class="container mt-4">
-        <div class="card p-4">
+        <div class="card p-4 shadow-lg">
             <div class="card-title h4">
                 Halaman Form Umur
             </div>
             <div class="text-muted">Masukan nama dan umur anda dibawah : </div>
-            <form action="#" method="post">
+            <form action="{{route('proses')}}" method="post">
+                
+                {{-- keamanan untuk generate token. --}}
+                @csrf
                 <div class="form-group mt-3">
                     <label for="">Nama anda : </label>
                     <input type="text" name="name" required class="form-control">

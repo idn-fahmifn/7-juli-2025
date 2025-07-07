@@ -15,6 +15,15 @@ class UmurMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+
+        $proses = $request->session()->get('umur'); //nilai umur dari form
+
+        if($proses >= 18 && $proses < 100)
+        {
+            //izinkan route mengkases halaman sukses
+            return $next($request);
+        }
+        return back()->with('gagal', 'Umur kamu tidak sesuai');
+
     }
 }
