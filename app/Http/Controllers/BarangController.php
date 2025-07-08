@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -9,7 +10,8 @@ class BarangController extends Controller
     // method untuk index barang
     public function index()
     {
-        return 'Ini adalah halaman index barang';
+        $data = Barang::all();
+        return view('page.barang', compact('data'));
     }
 
     // method untuk report barang.

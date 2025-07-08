@@ -104,3 +104,5 @@ Route::get('sukses', [UmurController::class, 'sukses']) //routenya
 
 // route proses memfilter ke halaman sukses.
 Route::post('proses', [UmurController::class, 'proses'])->name('proses');
+
+

@@ -32,7 +32,7 @@ class UmurController extends Controller
         // ]);
 
         $input = $req->all();
-        //$input = wadah untuk menyimpan request, $req berisi data yang diinputkan di form.
+        // $input = wadah untuk menyimpan request, $req berisi data yang diinputkan di form.
 
         $validator = Validator::make($input, [
             'name' => ['string', 'required', 'min:3', 'max:30'],
