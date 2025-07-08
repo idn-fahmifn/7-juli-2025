@@ -25,9 +25,25 @@
             <div class="text-muted">Masukan nama dan umur anda dibawah : </div>
 
 
+            {{-- error middleware --}}
             @if (session('gagal'))
                 <div class="alert alert-warning alert-dismissible fade show mt-4" role="alert">
-                    <strong>Whoops!</strong> {{session('gagal')}}.
+                    <strong>Whoops!</strong> {{ session('gagal') }}.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            {{-- error validator --}}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                    <strong>Data tidak sesuai</strong>
+                    <ul>
+                        {{-- @foreach object / kumpulan pesan error dari validator --}}
+                        @foreach ($errors->all() as $msg)
+                        {{-- dibuat menjadi error per-item, karena dilooping. --}}
+                            <li>{{$msg}}</li>
+                        @endforeach
+                    </ul>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
